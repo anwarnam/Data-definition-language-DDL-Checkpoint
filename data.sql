@@ -1,0 +1,40 @@
+
+
+CREATE TABLE CUSTOMER (
+    CustomerID NUMBER PRIMARY KEY,
+    FirstName VARCHAR2(50),
+    LastName VARCHAR2(50),
+    Address VARCHAR2(255),
+    Phone VARCHAR2(20)
+);
+
+
+CREATE TABLE PRODUCT (
+    ProductID NUMBER PRIMARY KEY,
+    ProductName VARCHAR2(100),
+    Price NUMBER
+);
+
+
+CREATE TABLE ORDERS (
+    OrderID NUMBER PRIMARY KEY,
+    CustomerID NUMBER,
+    OrderAmount NUMBER,
+    OrderDate DATE DEFAULT SYSDATE,
+    FOREIGN KEY (CustomerID) REFERENCES CUSTOMER(CustomerID)
+);
+
+
+CREATE TABLE ORDER_DETAILS (
+    OrderDetailID NUMBER PRIMARY KEY,
+    OrderID NUMBER,
+    ProductID NUMBER,
+    Quantity NUMBER,
+    FOREIGN KEY (OrderID) REFERENCES ORDERS(OrderID),
+    FOREIGN KEY (ProductID) REFERENCES PRODUCT(ProductID)
+);
+
+
+ALTER TABLE PRODUCT
+ADD Category VARCHAR2(20);
+
